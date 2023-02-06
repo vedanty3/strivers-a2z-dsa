@@ -1,45 +1,19 @@
-// BRUTE FORCE
 class Solution
 {
 public:
     vector<int> twoSum(vector<int> &nums, int target)
     {
+        vector<int> ans;
+        unordered_map<int, int> mpp;
         for (int i = 0; i < nums.size(); ++i)
         {
-            int rem = target - nums[i];
-            for (int j = 0; j < nums.size(); ++j)
+            if (mpp.find(target - nums[i]) != mpp.end())
             {
-                if (j == i)
-                    continue;
-                if (rem == nums[j])
-                {
-                    return {i, j};
-                }
-            }
-        }
-
-        return {};
-    }
-};
-
-// Optimal
-class Solution
-{
-public:
-    vector<int> twoSum(vector<int> &nums, int target)
-    {
-        map<int, int> mpp;
-
-        for (int i = 0; i < nums.size(); ++i)
-        {
-            int rem = target - nums[i];
-            if (mpp.find(rem) != mpp.end())
-            {
-                return {i, mpp[rem]};
+                ans.emplace_back(i);
+                ans.emplace_back(mpp[target - nums[i]]);
             }
             mpp[nums[i]] = i;
         }
-
-        return {};
+        return ans;
     }
 };
