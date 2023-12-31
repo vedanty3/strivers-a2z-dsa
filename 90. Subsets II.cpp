@@ -1,5 +1,3 @@
-
-
 // Approach 1
 
 class Solution {
