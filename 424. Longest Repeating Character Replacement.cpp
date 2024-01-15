@@ -2,26 +2,27 @@ class Solution {
 	public:
 		int characterReplacement(string s, int k) {
 			int n = s.size();
-			int max_len = 0;
 			int i = 0;
 			int j = 0;
-			unordered_map<char, int>mpp;
-			int max_repeating = 0;
+			int r = 0;
+			int max_len = 0;
+			unordered_map<char, int> mpp;
 
-			while(j<n) {
+			while (j < n) {
 				mpp[s[j]]++;
-				max_repeating = max(max_repeating, mpp[s[j]]);
-				int nk = j - i + 1 - max_repeating;
+				r = max(r, mpp[s[j]]);
+				int nr = j - i + 1 - r;
 
-				if(nk>k) {
+				if (nr > k) {
 					mpp[s[i]]--;
 					++i;
 				}
 
-				max_len = max(max_len, j-i+1);
+				max_len = max(max_len, j - i + 1);
 				++j;
 			}
 
 			return max_len;
 		}
 };
+
